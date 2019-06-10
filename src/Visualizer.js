@@ -3,7 +3,7 @@ import { IoIosPlay, IoIosPause } from "react-icons/io";
 
 // style
 import styled from "styled-components";
-import { fontSize, primary } from "./style/fonts";
+import { fontSize, primary, mediaQueries } from "./style/fonts";
 
 const Container = styled.div`
   display: flex;
@@ -50,11 +50,19 @@ const FileName = styled.div`
   margin-left: 16px;
   display: flex;
   align-items: center;
+
+  @media (max-width: ${mediaQueries.mobile}) {
+    font-size: ${fontSize.xxs};
+  }
 `;
 
 const ButtonText = styled.div`
   font-size: ${fontSize.sm};
   line-height: 20px;
+
+  @media (max-width: ${mediaQueries.mobile}) {
+    font-size: ${fontSize.xxs};
+  }
 `;
 
 const StyledPlayIcon = styled(IoIosPlay)`
@@ -246,7 +254,9 @@ const Visualizer = () => {
             onChange={handleFiles}
             ref={input}
           />
-          <FileName>{fileName}</FileName>
+          <FileNameContainer>
+            <FileName>{fileName}</FileName>
+          </FileNameContainer>
         </UploadAndTitle>
         <div>{showIcon !== null && showButton()}</div>
       </VisualizerControls>
