@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IoIosPlay, IoIosPause } from "react-icons/io";
 
-// style
+// style //
 import styled from "styled-components";
 import { fontSize, primary, mediaQueries } from "./style/fonts";
 
@@ -25,6 +25,7 @@ const StyledLabel = styled.label`
   align-items: center;
   color: black;
   background-color: white;
+  min-width: 100px;
   transition: color 0.25s, background-color 0.25s;
 
   &:hover {
@@ -42,27 +43,28 @@ const VisualizerControls = styled.div`
 
 const UploadAndTitle = styled.div`
   display: flex;
+  min-width: 0px;
+`;
+
+const FileNameContainer = styled.div`
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-width: 0px;
 `;
 
 const FileName = styled.div`
   font-size: ${fontSize.sm};
   line-height: 20px;
   margin-left: 16px;
-  display: flex;
-  align-items: center;
-
-  @media (max-width: ${mediaQueries.mobile}) {
-    font-size: ${fontSize.xxs};
-  }
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const ButtonText = styled.div`
   font-size: ${fontSize.sm};
   line-height: 20px;
-
-  @media (max-width: ${mediaQueries.mobile}) {
-    font-size: ${fontSize.xxs};
-  }
 `;
 
 const StyledPlayIcon = styled(IoIosPlay)`
