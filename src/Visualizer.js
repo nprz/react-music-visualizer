@@ -92,23 +92,24 @@ const StyledPauseIcon = styled(IoIosPause)`
 const RATIO = 2.6666;
 
 const getWidth = () => {
-  const navWidth = 162;
-  const margin = 64;
   const maxCanvasWidth = 800;
-  const maxWidth = maxCanvasWidth + margin + navWidth;
 
-  const removeNavWidth = window.innerWidth > 800 ? 162 : 0;
+  if (window.innerWidth > maxCanvasWidth) return maxCanvasWidth;
 
-  if (window.innerWidth > maxWidth) return maxCanvasWidth;
-
-  if (window.innerWidth < maxWidth)
-    return window.innerWidth - 66 - removeNavWidth;
+  if (window.innerWidth < maxCanvasWidth) return window.innerWidth - 16;
 };
 
 const calcBarHeight = (barHeight, height) => {
   const barHeightPercent = barHeight / 255;
   return Math.floor(barHeightPercent * height);
 };
+
+let isSafari;
+
+if (typeof window !== `undefined`) {
+  AudioContext = window.AudioContext || window.webkitAudioContext;
+  isSafari = !!window.webkitAudioContext;
+}
 
 const Visualizer = () => {
   const [stateWidth, setWidth] = useState(getWidth());
@@ -199,7 +200,7 @@ const Visualizer = () => {
     dataArray.current = new Uint8Array(analyser.current.frequencyBinCount);
 
     //begin
-    setShowIcon("pause");
+    setShowIcon(isSafari ? "play" : "pause");
     source.current.start(0);
 
     setInterval(() => {
